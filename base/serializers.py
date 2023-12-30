@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Task
+from .models import Task, Project
 
 class ProjectSerializer(serializers.ModelSerializer):
   class Meta:
-    model = Task
-    fields = '__all__'
+    model = Project
+    fields = ('title',)
 
   def create(self, validated_data):
     user = self.context['request'].user
