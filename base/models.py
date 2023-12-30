@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import CustomUser
 
 class Project(models.Model):
   title = models.CharField(max_length=50)
@@ -18,6 +19,7 @@ class Task(models.Model):
   due_date = models.DateField()
   priority = models.CharField(max_length=10 ,choices=CHOICES)
   project = models.ForeignKey(Project, on_delete=models.CASCADE)
+  owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
 
   def __str__(self):
     return self.title
