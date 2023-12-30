@@ -1,24 +1,29 @@
 from django.test import TestCase
 from .models import Project, Task
 from datetime import date
+from users.models import CustomUser
 
 class ProjectModelTest(TestCase):
 
   def test_project_creation(self):
-    project = Project.objects.create(title="test project")
+    user = CustomUser.objects.create(username='testuser', password='testpassword')
+    project = Project.objects.create(title="test project", owner=user)
     self.assertEqual(project.title, 'test project')
+    self.assertEqual(project.owner, user)
     self.assertEqual(str(project), 'test project')
 
 class TaskModelTest(TestCase):
 
   def setUp(self):
+    user = CustomUser.objects.create(username='testuser', password='testpassword')
     project = Project.objects.create(title="test project")
     Task.objects.create(
       title= "test task",
       description= "test description",
       due_date=date(2024, 1, 10),
       priority="Medium",
-      project=project
+      project=project,
+      owner=user
     )
 
   def test_task_creation(self):
@@ -26,5 +31,7 @@ class TaskModelTest(TestCase):
     self.assertEqual(task.description, "test description")
     self.assertEqual(task.due_date, date(2024, 1, 10))
     self.assertEqual(task.priority, "Medium")
+    self.assertEqual(task.project.title, 'test project')
+    self.assertEqual(task.owner.username, 'testuser')
     self.assertEqual(str(task), "test task")
 

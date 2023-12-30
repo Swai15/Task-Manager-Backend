@@ -8,13 +8,13 @@ class Project(models.Model):
   def __str__ (self):
     return self.title
 
+
 class Task(models.Model):
   CHOICES = [
     ('Low', 'Low'),
     ('Medium', 'Medium'),
     ('High', 'High'),
   ]
-
   title = models.CharField(max_length=50)
   description = models.TextField()
   due_date = models.DateField()
