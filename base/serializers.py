@@ -4,7 +4,8 @@ from .models import Task, Project
 class ProjectSerializer(serializers.ModelSerializer):
   class Meta:
     model = Project
-    fields = ('title',)
+    fields = ('id', 'title',)
+    read_only_fields = ['id']
 
   def create(self, validated_data):
     user = self.context['request'].user
@@ -16,6 +17,7 @@ class TaskSerializer(serializers.ModelSerializer):
   class Meta:
     model = Task
     fields = '__all__'
+    read_only_fields = ['id', 'owner']
 
   def create(self, validated_data):
     user = self.context['request'].user
