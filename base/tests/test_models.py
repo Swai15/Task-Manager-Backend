@@ -1,8 +1,9 @@
 from django.test import TestCase
-from .models import Project, Task
+from base.models import Project, Task
 from datetime import date
 from users.models import CustomUser
 
+# MODEL TESTS
 class ProjectModelTest(TestCase):
 
   def test_project_creation(self):
@@ -34,4 +35,3 @@ class TaskModelTest(TestCase):
     self.assertEqual(task.project.title, 'test project')
     self.assertEqual(task.owner.username, 'testuser')
     self.assertEqual(str(task), "test task")
-
