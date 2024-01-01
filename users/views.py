@@ -7,7 +7,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import CustomUser
-from .serializers import CustomUserSerializer, CustomUserLoginSerializer
+from .serializers import CustomUserSerializer, MyTokenObtainPairSerializer
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+  serializer_class = MyTokenObtainPairSerializer
 
 class UserRegisterView(generics.CreateAPIView):
   serializer_class = CustomUserSerializer
@@ -34,6 +38,4 @@ class UserRegisterView(generics.CreateAPIView):
     headers = self.get_success_headers(serializer.data)
     return Response({'user': serializer.data, 'tokens': tokens}, status=status.HTTP_201_CREATED, headers=headers)
 
-
-class UserLoginView(TokenObtainPairView):
-  serializer_class = CustomUserLoginSerializer
+# You wasted time trying to create a login serializer and view, should've learnt more about how jwt work :(
