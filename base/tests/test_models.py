@@ -24,7 +24,8 @@ class TaskModelTest(TestCase):
       due_date=date(2024, 1, 10),
       priority="Medium",
       project=project,
-      owner=user
+      owner=user,
+      completed=False
     )
 
   def test_task_creation(self):
@@ -35,3 +36,4 @@ class TaskModelTest(TestCase):
     self.assertEqual(task.project.title, 'test project')
     self.assertEqual(task.owner.username, 'testuser')
     self.assertEqual(str(task), "test task")
+    self.assertEqual(task.completed, False)
