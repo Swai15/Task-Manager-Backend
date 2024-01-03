@@ -67,7 +67,4 @@ Keep track of tasks with custom project folders and secure user account creation
 
 7. **Access API Documentation:**
 
-   ```bash
-    Visit http://127.0.0.1:8000/docs/swagger for the interactive API documentation provided by Drf-Spectacular.
-
-   ```
+   Visit http://127.0.0.1:8000/docs/swagger for the interactive API documentation provided by Drf-Spectacular.

@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Project, Task
 
 class SharedFields(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 # PROJECT VIEWS
 class ProjectListCreateView(SharedFields, generics.ListCreateAPIView):
@@ -25,7 +25,6 @@ class ProjectDetailView( SharedFields,generics.RetrieveUpdateDestroyAPIView):
 class TaskListCreateView(generics.ListCreateAPIView):
   queryset = Task.objects.all()
   serializer_class = TaskSerializer
-  permission_classes = [IsAuthenticated]
 
   def perform_create(self, serializer):
     serializer.save(owner=self.request.user)
@@ -34,4 +33,3 @@ class TaskListCreateView(generics.ListCreateAPIView):
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
   queryset = Task.objects.all()
   serializer_class = TaskSerializer
-  permission_classes = [IsAuthenticated]
