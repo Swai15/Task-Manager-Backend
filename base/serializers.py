@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import Task, Project
+from django.contrib.auth import get_user_model
+
+CustomUser = get_user_model()
 
 class TaskSerializer(serializers.ModelSerializer):
   class Meta:
@@ -9,7 +12,20 @@ class TaskSerializer(serializers.ModelSerializer):
 
   def create(self, validated_data):
     user = self.context['request'].user
-    validated_data['owner'] = user
+
+    if user.is_authenticated:      
+      validated_data['owner'] = user
+    else:
+      default_user = CustomUser.objects.get(username='admin')
+      validated_data['owner'] = default_user
+      print(f"test") 
+
+    # project_title = validated_data.get('project', None)
+
+    # if project_title: 
+    #   project = Project.objects.get(title=project_title)
+    #   validated_data['project'] = project.id
+
     return super().create(validated_data)
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -22,5 +38,14 @@ class ProjectSerializer(serializers.ModelSerializer):
 
   def create(self, validated_data):
     user = self.context['request'].user
-    validated_data['owner'] = user
+
+    # set default user 
+    if user.is_authenticated:      
+      validated_data['owner'] = user
+    else:
+      default_user = CustomUser.objects.get(username='admin')
+      validated_data['owner'] = default_user
+
     return super().create(validated_data)
+
+  # Limit tasks displayed
