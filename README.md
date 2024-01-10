@@ -68,3 +68,7 @@ Keep track of tasks with custom project folders and secure user account creation
 7. **Access API Documentation:**
 
    Visit http://127.0.0.1:8000/docs/swagger for the interactive API documentation provided by Drf-Spectacular.
+
+### Project Progress Tracking
+
+The development progress of this project was being actively tracked using using this [board](https://trello.com/b/9X0ipFzH/task-manager).

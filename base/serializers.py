@@ -36,6 +36,15 @@ class ProjectSerializer(serializers.ModelSerializer):
     fields = ('id', 'title', 'tasks')
     read_only_fields = ['id']
 
+  # def validate(self, validated_data):
+  #   request = self.context.validated_data('request')
+  #   if request and request.method == "PUT":
+  #     title = validated_data.get('title')
+  #     if not title:
+  #       raise serializers.ValidationError({'title': 'Title is required for updates'})
+  #   return validated_data
+  
+
   def create(self, validated_data):
     user = self.context['request'].user
 

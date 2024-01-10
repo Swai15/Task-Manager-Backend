@@ -15,8 +15,8 @@ class Task(models.Model):
     ('Medium', 'Medium'),
     ('High', 'High'),
   ]
-  title = models.CharField(max_length=50)
-  description = models.TextField()
+  title = models.CharField(max_length=50, blank=False, null=False)
+  description = models.TextField(blank=True)
   due_date = models.DateField()
   priority = models.CharField(max_length=10 ,choices=CHOICES)
   project = models.ForeignKey('base.Project', on_delete=models.CASCADE, related_name='tasks_project')
