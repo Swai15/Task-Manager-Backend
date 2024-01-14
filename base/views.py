@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Project, Task
 
 class SharedFields(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
 # PROJECT VIEWS
 class ProjectListCreateView(SharedFields, generics.ListCreateAPIView):
