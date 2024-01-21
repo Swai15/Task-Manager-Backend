@@ -2,9 +2,20 @@ from django.db import models
 from users.models import CustomUser
 
 class Project(models.Model):
+  ICON_CHOICES = [
+    ('default', 'Default'),
+    ('home', 'Home'),
+    ('work', 'work'),
+    ('health', 'Health'),
+    ('savings', 'Savings'),
+    ('social', 'Social'),
+
+  ]
+
   title = models.CharField(max_length=50)
   owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
   tasks = models.ManyToManyField('base.Task', related_name='project_tasks')
+  icon = models.CharField(max_length=10, choices=ICON_CHOICES, default='default')
 
   def __str__ (self):
     return self.title
@@ -14,7 +25,7 @@ class Task(models.Model):
     ('Low', 'Low'),
     ('Medium', 'Medium'),
     ('High', 'High'),
-  ]
+  ] 
   title = models.CharField(max_length=50, blank=False, null=False)
   description = models.TextField(blank=True)
   due_date = models.DateField()
