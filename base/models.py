@@ -15,10 +15,15 @@ class Project(models.Model):
   title = models.CharField(max_length=50)
   owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
   tasks = models.ManyToManyField('base.Task', related_name='project_tasks')
-  icon = models.CharField(max_length=10, choices=ICON_CHOICES, default='default')
+  icon = models.CharField(max_length=10,
+  choices = ICON_CHOICES, default='default')
+  created_at =  models.DateTimeField(auto_now_add=True)
 
   def __str__ (self):
     return self.title
+
+  class Meta: 
+    ordering = ['created_at']
 
 class Task(models.Model):
   CHOICES = [
